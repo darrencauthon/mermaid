@@ -756,7 +756,7 @@ var addEdges = function (edges, g) {
         else {
 
             if(typeof edge.style === 'undefined'){
-                g.setEdge(edge.start, edge.end,{labelType: "html",style: "stroke: #333; stroke-width: 1.5px;fill:none", labelpos:'c', label: '<span style="background:#e8e8e8">'+edge.text+'</span>', arrowheadStyle: "fill: #333", arrowhead: aHead},cnt);
+                g.setEdge(edge.start, edge.end,{labelType: "html",style: "stroke: #333; stroke-width: 1.5px;fill:none", labelpos:'c', label: '<span style="background:#fff;color:#000;">'+edge.text+'</span>', arrowheadStyle: "fill: #333", arrowhead: aHead},cnt);
             }else{
                 g.setEdge(edge.start, edge.end, {
                     labelType: "html",style: style, arrowheadStyle: "fill: #333", label: edge.text, arrowhead: aHead
@@ -971,6 +971,7 @@ global.mermaid = {
         return exports.version();
     }
 };
+
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./graphDb":6,"./parser/flow":7,"./sequenceRenderer":10,"./utils":11,"he":4}],6:[function(require,module,exports){
 /**
@@ -1409,27 +1410,27 @@ parse: function parse(input) {
             }
             action = table[state] && table[state][symbol];
         }
-                    if (typeof action === 'undefined' || !action.length || !action[0]) {
-                var errStr = '';
-                expected = [];
-                for (p in table[state]) {
-                    if (this.terminals_[p] && p > TERROR) {
-                        expected.push('\'' + this.terminals_[p] + '\'');
-                    }
+        if (typeof action === 'undefined' || !action.length || !action[0]) {
+            var errStr = '';
+            expected = [];
+            for (p in table[state]) {
+                if (this.terminals_[p] && p > TERROR) {
+                    expected.push('\'' + this.terminals_[p] + '\'');
                 }
-                if (lexer.showPosition) {
-                    errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
-                } else {
-                    errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
-                }
-                this.parseError(errStr, {
-                    text: lexer.match,
-                    token: this.terminals_[symbol] || symbol,
-                    line: lexer.yylineno,
-                    loc: yyloc,
-                    expected: expected
-                });
             }
+            if (lexer.showPosition) {
+                errStr = 'Parse error on line ' + (yylineno + 1) + ':\n' + lexer.showPosition() + '\nExpecting ' + expected.join(', ') + ', got \'' + (this.terminals_[symbol] || symbol) + '\'';
+            } else {
+                errStr = 'Parse error on line ' + (yylineno + 1) + ': Unexpected ' + (symbol == EOF ? 'end of input' : '\'' + (this.terminals_[symbol] || symbol) + '\'');
+            }
+            this.parseError(errStr, {
+                text: lexer.match,
+                token: this.terminals_[symbol] || symbol,
+                line: lexer.yylineno,
+                loc: yyloc,
+                expected: expected
+            });
+        }
         if (action[0] instanceof Array && action.length > 1) {
             throw new Error('Parse Error: multiple actions possible at state: ' + state + ', token: ' + symbol);
         }
@@ -1939,6 +1940,7 @@ if (typeof module !== 'undefined' && require.main === module) {
   exports.main(process.argv.slice(1));
 }
 }
+
 }).call(this,require("1YiZ5S"))
 },{"1YiZ5S":3,"fs":1,"path":2}],8:[function(require,module,exports){
 (function (process){
