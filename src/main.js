@@ -124,12 +124,12 @@ var addEdges = function (edges, g) {
         }
         // Edge with text
         else {
-
+            labelText = '<span style="background:#fff;color:#000;">'+edge.text+'</span>'
             if(typeof edge.style === 'undefined'){
-                g.setEdge(edge.start, edge.end,{labelType: "html",style: "stroke: #333; stroke-width: 1.5px;fill:none", labelpos:'c', label: '<span style="background:#fff;color:#000;">'+edge.text+'</span>', arrowheadStyle: "fill: #333", arrowhead: aHead},cnt);
+                g.setEdge(edge.start, edge.end,{labelType: "html",style: "stroke: #333; stroke-width: 1.5px;fill:none", labelpos:'c', label: labelText, arrowheadStyle: "fill: #333", arrowhead: aHead},cnt);
             }else{
                 g.setEdge(edge.start, edge.end, {
-                    labelType: "html",style: style, arrowheadStyle: "fill: #333", label: edge.text, arrowhead: aHead
+                    labelType: "html",style: style, arrowheadStyle: "fill: #333", label: labelText, arrowhead: aHead
                 },cnt);
             }
         }
