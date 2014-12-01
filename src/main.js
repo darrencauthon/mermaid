@@ -57,6 +57,8 @@ var addVertices = function (vert, g) {
             verticeText = vertice.text;
         }
 
+        verticeText = '<span style="background:#fff;color:#000;font-size:24">'+verticeText+'</span>'
+
         var radious = 0;
         var _shape = '';
 
@@ -124,7 +126,7 @@ var addEdges = function (edges, g) {
         }
         // Edge with text
         else {
-            labelText = '<span style="background:#fff;color:#000;">'+edge.text+'</span>'
+            labelText = '<span style="background:#fff;color:#000;font-size:24px">'+edge.text+'</span>'
             if(typeof edge.style === 'undefined'){
                 g.setEdge(edge.start, edge.end,{labelType: "html",style: "stroke: #333; stroke-width: 1.5px;fill:none", labelpos:'c', label: labelText, arrowheadStyle: "fill: #333", arrowhead: aHead},cnt);
             }else{
